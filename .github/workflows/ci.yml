@@ -7,6 +7,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: action/checkout@v2
+      - name: cache node_modules
+        uses: actions/cache@v1
+        with: 
+          # paths: where caches is stored. different for various operating systems
+          path: ~/.npm
+          key: ${{runner.os}}-node-${{hashFiles('**/*package-lock.json')}}
+          restore-key: 
       - name: Use NodeJS
         uses: actions/setup-node@v1
         with:
