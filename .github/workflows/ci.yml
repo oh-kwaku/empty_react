@@ -13,13 +13,13 @@ jobs:
           # paths: where caches is stored. different for various operating systems
           path: ~/.npm
           key: ${{runner.os}}-node-${{hashFiles('**/*package-lock.json')}}
-          restore-key: 
+          restore-keys: 
       - name: Use NodeJS
         uses: actions/setup-node@v1
         with:
           node-version: "12.x"
       - run: npm ci
-      - run: npm run format:check
+      # - run: npm run format:check
       - run: npm text -- --coverage
         env:
           CI: true
