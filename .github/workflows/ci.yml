@@ -25,7 +25,6 @@ jobs:
       #   env:
       #     CI: true
       - name: build project
-        if: github.event_name=='push'
         run: npm run build
       - name: upload build folder 
         uses: actions/upload-artifact@v1
