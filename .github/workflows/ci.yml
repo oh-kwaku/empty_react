@@ -24,11 +24,11 @@ jobs:
       # - run: npm text -- --coverage
       #   env:
       #     CI: true
-      - name: buildl project
+      - name: build project
         if: github.event_name=='push'
         run: npm run build
       - name: upload build folder 
-        uses: actions/upload-artificat@v1
+        uses: actions/upload-artifact@v1
         with: 
           name: build
           path: 
