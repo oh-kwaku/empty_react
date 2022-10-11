@@ -18,10 +18,20 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: "12.x"
+    
       - run: npm ci
       # - run: npm run format:check
       # - run: npm text -- --coverage
       #   env:
       #     CI: true
+      - name: buildl project
+        if: github.event_name=='push'
+        run: npm run build
+      - name: upload build folder 
+        uses: actions/upload-artificat@v1
+        with: 
+          name: build
+          path: 
+       
 
   
