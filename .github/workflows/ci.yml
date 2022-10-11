@@ -20,8 +20,8 @@ jobs:
           node-version: "12.x"
       - run: npm ci
       # - run: npm run format:check
-      - run: npm text -- --coverage
-        env:
-          CI: true
+      # - run: npm text -- --coverage
+      #   env:
+      #     CI: true
 
   
