@@ -1,7 +1,9 @@
 name: CI
 on:
   pull_request:
-    branches: [develop]
+    branches: [develop, master]
+  push:
+    branches: [develop, master]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -31,6 +33,12 @@ jobs:
         with: 
           name: build
           path: build
+      - name: create a release
+        if: github.event_name== 'push' && github.ref=='refs/heads/master' #only run this step if we push to master
+        run: npm semantic-release
+        env: 
+          GITHUB_TOKEN:${{secrets.GITHUB_TOKEN}}
+        
        
 
   
