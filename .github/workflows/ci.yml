@@ -15,7 +15,7 @@ jobs:
           # paths: where caches is stored. different for various operating systems
           path: ~/.npm
           key: ${{runner.os}}-node-${{hashFiles('**/*package-lock.json')}}
-          restore-keys: 
+          # restore-keys: 
       - name: Use NodeJS
         uses: actions/setup-node@v1
         with:
@@ -33,6 +33,11 @@ jobs:
         with: 
           name: build
           path: build
+      - name: ZIP Assets
+        if: github.event_name=='push' && github.ref== 'refs/heads/master'
+        run: | # Since we're running the workflow on ubuntu we can use ZIP command to zip the build folder and coverage folder
+          Zip -r build.zip ./build 
+          ZIP -r coverage.zip ./coverage
       - name: create a release
         if: github.event_name== 'push' && github.ref=='refs/heads/master' #only run this step if we push to master
         run: npm semantic-release
