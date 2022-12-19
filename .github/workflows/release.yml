@@ -11,3 +11,7 @@ jobs:
         run: |
            curl -X POST -H 'Content-type: application/json' --data '{"text":"This is a new release ${{github.event.release.tag_name}} is out. <${{github.event.release.html_url}}|check it out>"}' 
            ${{secretes.SLACK_WEBHOOK}}
+      - name: create issue on failed PR
+        if: failure() && github.event.name=='pull_request'
+        run: |
+          
